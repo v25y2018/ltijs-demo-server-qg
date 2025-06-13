@@ -4,6 +4,7 @@ const path = require('path')
 // Requiring Ltijs
 const lti = require('ltijs').Provider
 
+
 // Grading route
 router.post('/grade', async (req, res) => {
   try {
@@ -72,7 +73,8 @@ router.post('/deeplink', async (req, res) => {
       }
     }
 
-    const form = await lti.DeepLinking.createDeepLinkingForm(res.locals.token, items, { message: 'Successfully Registered' })
+    const form = await lti.DeepLinking.createDeepLinkingForm
+    (res.locals.token, items, { message: 'Successfully Registered' })
     if (form) return res.send(form)
     return res.sendStatus(500)
   } catch (err) {
@@ -100,6 +102,10 @@ router.get('/resources', async (req, res) => {
   return res.send(resources)
 })
 
+router.get('/get-role',async (req,res)=>{
+  
+})
+
 // Get user and context information
 router.get('/info', async (req, res) => {
   const token = res.locals.token
@@ -119,5 +125,7 @@ router.get('/info', async (req, res) => {
 
 // Wildcard route to deal with redirecting to React routes
 router.get('*', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')))
+
+
 
 module.exports = router
